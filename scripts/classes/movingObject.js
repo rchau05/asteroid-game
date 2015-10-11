@@ -31,4 +31,15 @@
 		this.position.y += this.velocity.y;
 	}
 
+	MovingObject.prototype.outOfBounds = function(dimensions) {
+		return (
+			this.position.x < 0 - this.radius ||
+			this.position.y < 0 - this.radius ||
+			this.position.y > dimensions.height + this.radius ||
+			this.position.x > dimensions.width + this.radius
+		)
+	}
+
 })(window);
+
+// Write a 'MovingObject#outOfBounds(bounds)' method. This method should return true if no part of the object is on screen.

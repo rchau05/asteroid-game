@@ -34,6 +34,7 @@
     this.addAsteroids();
     this.move();
     this.draw();
+    this.removeOutOfBounds();
   };
 
   Game.prototype.play = function() {
@@ -43,5 +44,12 @@
       self.step();
     }, 1000/60)
   };
+
+  Game.prototype.removeOutOfBounds = function() {
+    this.asteroids = _.reject(this.asteroids, function(asteroid) {
+      return asteroid.outOfBounds({width: 500, height: 500})
+    })
+  }
+
 
 })(window);
