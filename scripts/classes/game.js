@@ -2,7 +2,7 @@
   // set up you're namespace like this in every file
   var Asteroids = root.Asteroids = (root.Asteroids || {});
 
-  var MIN_ASTEROIDS = 5;
+  var MIN_ASTEROIDS = 50;
 
   var Game = Asteroids.Game = function (options) {
     this.context = options.context;
