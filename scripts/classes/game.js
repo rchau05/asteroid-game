@@ -2,17 +2,21 @@
   // set up you're namespace like this in every file
   var Asteroids = root.Asteroids = (root.Asteroids || {});
 
+  var Ship = Asteroids.Ship;
+
   var MIN_ASTEROIDS = 50;
 
   var Game = Asteroids.Game = function (options) {
     this.context = options.context;
     this.asteroids = [];
+    this.ship = new Ship();
   };
 
   Game.prototype.move = function() {
     _.each(this.asteroids, function(asteroid) {
       asteroid.move();
     });
+    this.ship.move()
   };
 
   Game.prototype.addAsteroids = function() {
@@ -28,6 +32,7 @@
     _.each(this.asteroids, function(asteroid) {
       asteroid.draw(self.context);
     })
+    this.ship.draw(self.context);
   };
 
   Game.prototype.step = function() {
