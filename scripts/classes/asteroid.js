@@ -9,7 +9,7 @@
     this.position = options.position;
     this.velocity = options.velocity;
     this.radius = RADIUS;
-    this.color = 'green';
+    this.color = 'gray';
   };
 
   Asteroid.prototype = new Asteroids.MovingObject({});

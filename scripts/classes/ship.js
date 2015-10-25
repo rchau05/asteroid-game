@@ -4,16 +4,17 @@
 
   //include external files
   var MovingObject = Asteroids.MovingObject;
+  var Bullet = Asteroids.Bullet;
 
   var MAX_SPEED = 4;
   var RADIUS = 10;
 
   var Ship = Asteroids.Ship = function (options) {
     this.position = {x: 255, y: 255};
-    this.velocity = {x: 0, y: 0};;
+    this.velocity = {x: 0, y: 0};
     this.direction = 0; //radians
     this.radius = RADIUS;
-    this.color = 'gray';
+    this.color = 'green';
   };
   // This is an example of 'inheritance'
   Ship.prototype = new Asteroids.MovingObject({});
@@ -66,6 +67,18 @@
     if (turningRight) {
       this.direction = this.direction + (2 * Math.PI) / 100;
     }
+  }
+
+  Ship.prototype.shoot = function () {
+    var bullet = new window.Asteroids.Bullet({
+      position: {
+        x: this.position.x,
+        y: this.position.y
+      },
+      direction: this.direction
+    });
+
+    return bullet;
   }
 
 })(window);
