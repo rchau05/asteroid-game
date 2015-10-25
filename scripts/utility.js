@@ -10,6 +10,12 @@
         x: speed * Math.cos(direction),
         y: speed * Math.sin(direction)
       }
+    },
+
+    distance: function (position1, position2) {
+      var dx = position2.x - position1.x;
+      var dy = position2.y - position1.y;
+      return Math.sqrt(dx*dx + dy*dy);
     }
   };
 

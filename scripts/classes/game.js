@@ -62,12 +62,13 @@
     this.move();
     this.draw();
     this.removeOutOfBounds();
+    this.detectCollisions();
   };
 
   Game.prototype.play = function() {
     var self = this;
 
-    setInterval(function() {
+    self.interval = setInterval(function() {
       self.step();
     }, 1000/60)
   };
@@ -82,5 +83,17 @@
     });
   }
 
+  Game.prototype.pause = function () {
+    clearInterval(this.interval);
+  }
+
+  Game.prototype.detectCollisions = function() {
+    var self = this;
+    _.each(self.asteroids, function(asteroid) {
+      if (asteroid.isCollidedWith(self.ship)) {
+        self.pause();
+      } 
+    })
+  }
 
 })(window);

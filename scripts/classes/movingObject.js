@@ -2,6 +2,9 @@
   // set up you're namespace like this in every file
   var Asteroids = root.Asteroids = (root.Asteroids || {});
 
+  //include external files
+  var utility = Asteroids.utility;
+
   var MovingObject = Asteroids.MovingObject = function (options) {
   	this.position = options.position;
   	this.velocity = options.velocity;
@@ -39,6 +42,12 @@
 			this.position.x > dimensions.width + this.radius
 		)
 	}
+
+  MovingObject.prototype.isCollidedWith = function(otherObject) {
+    var sumOfRadii = this.radius + otherObject.radius;
+    var distance = utility.distance(this.position, otherObject.position);
+    return sumOfRadii > distance;
+  }
 
 })(window);
 
