@@ -2,7 +2,7 @@
   // set up you're namespace like this in every file
   var Asteroids = root.Asteroids = (root.Asteroids || {});
 
-  var MAX_SPEED = 4;
+  var MAX_SPEED = 2;
   var RADIUS = 10;
 
   var Asteroid = Asteroids.Asteroid = function (options) {

@@ -63,6 +63,8 @@
     this.draw();
     this.removeOutOfBounds();
     this.detectCollisions();
+    this.removeDestroyedAsteroids();
+    this.wrapObjects();
   };
 
   Game.prototype.play = function() {
@@ -89,11 +91,49 @@
 
   Game.prototype.detectCollisions = function() {
     var self = this;
+
+    // GAME OVER CONDITION
     _.each(self.asteroids, function(asteroid) {
       if (asteroid.isCollidedWith(self.ship)) {
         self.pause();
-      } 
+      }
     })
+
+    // ASTEROID / BULLET COLLITION TEST
+    _.each(self.asteroids, function(asteroid) {
+      _.each(self.bullets, function(bullet) {
+        if (asteroid.isCollidedWith(bullet)) {
+          asteroid.destroyed = true;
+          bullet.destroyed = true;
+        }
+      })
+    })
+  }
+
+  Game.prototype.removeDestroyedAsteroids = function() {
+    this.asteroids = _.reject(this.asteroids, function(asteroid) {
+      return asteroid.destroyed;
+    });
+    this.bullets = _.reject(this.bullets, function(bullet) {
+      return bullet.destroyed;
+    });
+  }
+
+  Game.prototype.wrapObjects = function() {
+    if(this.ship.outOfBounds({width: 500, height: 500})) {
+      if(this.ship.position.x < 0) {
+        this.ship.position.x = this.ship.position.x + (500 + 2*this.ship.radius)
+      }
+      else if(this.ship.position.x > 500) {
+        this.ship.position.x = this.ship.position.x - (500 + 2*this.ship.radius)
+      }
+      else if(this.ship.position.y < 0) {
+        this.ship.position.y = this.ship.position.y+ (500 + 2*this.ship.radius)
+      }
+      else if(this.ship.position.y > 500) {
+        this.ship.position.y = this.ship.position.y- (500 + 2*this.ship.radius)
+      }
+    }
   }
 
 })(window);
